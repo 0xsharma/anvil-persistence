@@ -50,6 +50,7 @@ func main() {
 		host         string
 		chainId      string
 		blockTime    string
+		port         string
 	)
 
 	flag.StringVar(&anvilCommand, "command", anvilCommandDefault, "The command to start Anvil")
@@ -57,11 +58,12 @@ func main() {
 	flag.StringVar(&host, "host", "127.0.0.1", "Host IP address")
 	flag.StringVar(&chainId, "chain-id", "31337", "Chain ID")
 	flag.StringVar(&blockTime, "block-time", "12", "Block time in seconds")
+	flag.StringVar(&port, "port", "8545", "Port")
 
 	flag.Parse()
 
 	// Anvil executable
-	anvil := exec.Command(anvilCommand, "--host", host, "--chain-id", chainId, "--block-time", blockTime, "--ipc")
+	anvil := exec.Command(anvilCommand, "--host", host, "--chain-id", chainId, "--block-time", blockTime, "--port", port, "--ipc")
 
 	// Output pipe of the Anvil process
 	stdout, err := anvil.StdoutPipe()
